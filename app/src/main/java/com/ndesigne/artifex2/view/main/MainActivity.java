@@ -11,14 +11,16 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.ndesigne.artifex2.AES_GCM_Init;
+import com.ndesigne.artifex2.model.AES.AES_GCM_Init;
 import com.ndesigne.artifex2.viewModel.remote.APIinterface;
 import com.ndesigne.artifex2.model.entities.Arti;
-import com.ndesigne.artifex2.Decrypt;
-import com.ndesigne.artifex2.Encrypt;
+import com.ndesigne.artifex2.model.AES.Decrypt;
+import com.ndesigne.artifex2.model.AES.Encrypt;
 import com.ndesigne.artifex2.R;
 
 import java.util.Base64;
+
+import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +30,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+    @Inject
+    Retrofit retrofit;
     public static String base_url = "https://cb419700-5920-4b57-93e0-17bd8d354702.mock.pstmn.io/";
     private TextView mtextView;
     private Button button;
@@ -37,12 +41,15 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mtextView = findViewById(R.id.textView);
         button = findViewById(R.id.buttonPost);
         aes = AES_GCM_Init.getInstance();
 
+        ((ArtiApplication) getApplication()).getNetworkComponent().inject(MainActivity.this);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
            System.out.println("je ne suis pas bon");
         }
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(base_url).addConverterFactory(GsonConverterFactory.create(gson)).build();
+        retrofit = new Retrofit.Builder().baseUrl(base_url).addConverterFactory(GsonConverterFactory.create(gson)).build();
         APIinterface apIinterface = retrofit.create(APIinterface.class);
 
         Call<Arti> call = apIinterface.sendData(arti);

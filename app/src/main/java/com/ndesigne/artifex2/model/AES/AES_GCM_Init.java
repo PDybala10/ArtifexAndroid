@@ -1,15 +1,10 @@
-package com.ndesigne.artifex2;
+package com.ndesigne.artifex2.model.AES;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
 
 import java.security.SecureRandom;
-import java.util.Base64;
 
 import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
 
 
 public class AES_GCM_Init{

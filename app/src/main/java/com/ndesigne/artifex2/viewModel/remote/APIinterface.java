@@ -5,11 +5,14 @@ import com.ndesigne.artifex2.model.entities.Arti;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+
 
 public interface APIinterface {
 

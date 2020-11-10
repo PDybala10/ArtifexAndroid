@@ -1,4 +1,4 @@
-package com.ndesigne.artifex2;
+package com.ndesigne.artifex2.model.AES;
 
 
 import android.annotation.SuppressLint;
