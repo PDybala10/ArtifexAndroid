@@ -4,6 +4,8 @@ package com.ndesigne.artifex2.model.AES;
 import android.annotation.SuppressLint;
 import android.os.Build;
 
+import java.io.ByteArrayOutputStream;
+import java.util.Arrays;
 import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -28,15 +30,36 @@ public class Encrypt {
         
         // Create GCMParameterSpec
         GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(GCM_TAG_LENGTH, IV);
+       // System.out.println("je suis le tagg "+gcmParameterSpec);
         
         // Initialize Cipher for ENCRYPT_MODE
         cipher.init(Cipher.ENCRYPT_MODE, keySpec, gcmParameterSpec);
-        
+
         // Perform Encryption
         byte[] cipherText = cipher.doFinal(plaintext);
 
+        byte[] tagVal = Arrays.copyOfRange(cipherText, cipherText.length - (128 / Byte.SIZE), cipherText.length);
+        //String tag  = Base64.getEncoder().encodeToString(tagVal);
+        //System.out.println("Tag value : "+ tag);
 
-            return Base64.getEncoder().encodeToString(cipherText);
+        byte[] clippedCipherText =  Arrays.copyOfRange(cipherText, 0, cipherText.length - (128 / Byte.SIZE)  );
+
+        //System.out.println("clippedCipherText value : "+ Base64.getEncoder().encodeToString(clippedCipherText));
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        outputStream.write( key );
+        System.out.println("key :"+key.length);
+        outputStream.write( IV );
+        System.out.println("IV :"+IV.length);
+        outputStream.write( tagVal );
+        System.out.println("tag :"+tagVal.length);
+        outputStream.write( clippedCipherText );
+        System.out.println("tag :"+clippedCipherText.length);
+
+        byte addedEncyptedVal[] = outputStream.toByteArray();
+
+            return Base64.getEncoder().encodeToString(addedEncyptedVal);
 
     }
 

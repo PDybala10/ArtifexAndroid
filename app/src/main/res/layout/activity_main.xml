@@ -4,16 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.main.MainActivity">
-
-
+    tools:context=".view.MainActivity">
 
     <TextView
-        android:text="BONJOUR"
-        android:id="@+id/textView"
+        android:text="Liste de voiture Pour id "
+        android:id="@+id/clientidText"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="Marque : Burgati"
+        android:id="@+id/marqueText"
         android:textSize="18dp"
         android:layout_width="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:text="Modèle : Chiron"
+        android:id="@+id/modeleText"
+        android:textSize="18dp"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="250dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:text="EnergieNGC : Hybride"
+        android:id="@+id/energieText"
+        android:textSize="18dp"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="350dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"/>
+    <TextView
+            android:text="immat : BB-145-ZE"
+        android:id="@+id/immatText"
+        android:textSize="18dp"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="450dp"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"/>
 
@@ -21,7 +53,8 @@
         android:id="@+id/buttonPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Post" />
+        android:layout_marginTop="550dp"
+        android:layout_centerHorizontal="true"
+        android:text="GET" />
 
 </RelativeLayout>

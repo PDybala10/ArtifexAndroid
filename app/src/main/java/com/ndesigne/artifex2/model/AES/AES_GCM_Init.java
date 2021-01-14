@@ -10,7 +10,7 @@ import javax.crypto.KeyGenerator;
 public class AES_GCM_Init{
 	
    private static final int AES_KEY_SIZE = 128;
-   private static final int GCM_IV_LENGTH = 12;
+   private static final int GCM_IV_LENGTH = 7;
     
    private byte[] secretKey;
    private byte[] IV;
