@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.ndesigne.artifex2.R;
 import com.ndesigne.artifex2.function.Function;
 import com.ndesigne.artifex2.injection.ArtiApplication;
@@ -133,13 +134,20 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("NewApi")
     private void apiCall() {
-       Payload payload  = new Payload("CNsgqakZPD+53F1gwh5agk7Yv97/95QcDH6wwkw3hADyZMgnC6iSGP89VR2rrPPmXqhpxgBVbWCJJ6XN4Fy90pEPAqYzE1kTy9M=");
+
         // gson = new GsonBuilder().setLenient().create();
         try {
            //chiffrement
-             data = arti.concat();
+             //data = arti.concat();
+
+            String data = gson.toJson(arti);
+            //fromJson
+            System.out.println("je suis une donnée : "+data);
              threads.startThread(aes, data);
-           // System.out.println("je suis une donnée : "+data);
+            System.out.println("je suis une donnée chiffré: "+data);
+
+
+
            /*  //System.out.println(MainActivity.arti);
            String testMess = Encrypt.encrypt(arti.concat().getBytes(), aes.getKey(), aes.getIV());
            //System.out.println("Bonjour tous le monde".getBytes().length);
@@ -157,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
         }
        // retrofit = new Retrofit.Builder().baseUrl(base_url).addConverterFactory(GsonConverterFactory.create(gson)).build();
         //APIinterface apIinterface = retrofit.create(APIinterface.class);
-
+        Payload payload  = new Payload(data);
         Call<Payload> call = apIinterface.sendData(payload);
         call.enqueue(new Callback<Payload>() {
             @Override

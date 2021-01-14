@@ -3,7 +3,6 @@ package com.ndesigne.artifex2.model.entities;
 public class Arti {
 
     private String marque, modele, energieNGC, immat;
-    private int clientid, carid;
 
     public Arti( String marque, String modele, String energieNGC, String immat ) {
 
