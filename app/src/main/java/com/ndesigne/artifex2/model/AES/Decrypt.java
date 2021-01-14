@@ -48,7 +48,7 @@ public class Decrypt {
         // System.out.println(Base64.getEncoder().encodeToString(key));
          inputStream.read(IV,0,7 );
         // System.out.println(Base64.getEncoder().encodeToString(IV));
-         System.out.println("mon errerur");
+
          inputStream.read(tag,0,16 );
          inputStream.read(clippedCipherText,0,Base64.getDecoder().decode(cipherText).length - 39);
 
@@ -78,7 +78,7 @@ public class Decrypt {
 
         // Perform Decryption
         byte[] decryptedText = cipher.doFinal(outputStream.toByteArray());
-        System.out.println("mon errerur");
+
         
         return new String(decryptedText);
     }

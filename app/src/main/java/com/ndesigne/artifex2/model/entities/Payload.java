@@ -14,7 +14,7 @@ public class Payload {
         return frm4PEX8P4esAwGTcpylM50DLLsz1K5wxuxX7sGWr3fu26fOZYfsVHf2uin7;
     }
 
-    public void setData (String frm4PEX8P4esAwGTcpylM50DLLsz1K5wxuxX7sGWr3fu26fOZYfsVHf2uin7) {
-        this.frm4PEX8P4esAwGTcpylM50DLLsz1K5wxuxX7sGWr3fu26fOZYfsVHf2uin7 = frm4PEX8P4esAwGTcpylM50DLLsz1K5wxuxX7sGWr3fu26fOZYfsVHf2uin7;
+    public void setData (String data) {
+        this.frm4PEX8P4esAwGTcpylM50DLLsz1K5wxuxX7sGWr3fu26fOZYfsVHf2uin7 = data;
     }
 }

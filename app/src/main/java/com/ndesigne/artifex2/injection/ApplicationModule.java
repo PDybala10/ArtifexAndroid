@@ -26,7 +26,7 @@ public class ApplicationModule {
     @Provides
     public String provideurlPath(){
 
-        return "https://edb30fee-03c4-414c-8b77-6580f89353c1.mock.pstmn.io/";
+        return "http://10.0.2.2:14950/";
     }
 
     @Singleton

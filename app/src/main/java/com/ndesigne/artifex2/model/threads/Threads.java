@@ -19,9 +19,9 @@ public class Threads extends AppCompatActivity {
 
     private  volatile boolean stopThread = false;
 
-    public void  startThread(AES_GCM_Init aes,  ArrayList<String> carList) {
+    public void  startThread(AES_GCM_Init aes, String data) {
         stopThread = false;
-        ExampleRunnable runnable = new ExampleRunnable(carList, aes);
+        ExampleRunnable runnable = new ExampleRunnable(data, aes);
         new Thread(runnable).start();
 
     }
@@ -30,10 +30,10 @@ public class Threads extends AppCompatActivity {
     }
 
     class ExampleRunnable implements Runnable {
-        List<String> carList;
+        String data;
         AES_GCM_Init aes;
-        ExampleRunnable(ArrayList<String> carList, AES_GCM_Init aes) {
-            this.carList = carList;
+        ExampleRunnable(String data, AES_GCM_Init aes) {
+            this.data = data;
             this.aes = aes;
         }
         @Override
@@ -48,15 +48,10 @@ public class Threads extends AppCompatActivity {
                         @Override
                         public void run() {
                             try {
-                               MainActivity.arti = new Arti(1,
-                                       1,
-                                       Encrypt.encrypt(carList.get(0).getBytes(), aes.getKey(), aes.getIV()) ,
-                                       Encrypt.encrypt(carList.get(1).getBytes(), aes.getKey(), aes.getIV()) ,
-                                       Encrypt.encrypt(carList.get(2).getBytes(), aes.getKey(), aes.getIV()) ,
-                                       Encrypt.encrypt(carList.get(3).getBytes(), aes.getKey(), aes.getIV()) ,
-                                       Base64.getEncoder().encodeToString(aes.getKey()),
-                                       Base64.getEncoder().encodeToString(aes.getIV())
-                               );
+
+                            MainActivity.data =  Encrypt.encrypt(data.getBytes(), aes.getKey(), aes.getIV());
+
+                            System.out.println("je suis une donnée : "+MainActivity.data);
                              //  System.out.println(MainActivity.arti);
                             } catch (Exception e) {
                                 e.printStackTrace();

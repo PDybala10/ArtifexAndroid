@@ -31,10 +31,7 @@ public interface APIinterface {
       Call<Arti> sendData(@Field("key") String key,
                              @Field("message") String message);*/
     String API_ROUTE = "/TwJHKBG0NUGwtjqNlmQmLfFvw22jrozlnZTHprsFIagu8dgG9GdbZT7F3Hz9";
-    @Headers({
-            "Content-type: application/json"
-    })
     @POST(API_ROUTE)
-    Call<Payload> sendData(@Body Payload posts);
+    Call<Payload> sendData(@Body Payload body);
 
 }

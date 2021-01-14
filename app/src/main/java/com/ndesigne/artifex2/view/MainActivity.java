@@ -34,6 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
    // public static String base_url = "https://cb419700-5920-4b57-93e0-17bd8d354702.mock.pstmn.io/";
     public static TextView clientidText,marqueText,modeleText,energieText,immatText;
     private Button button;
-    public static Arti arti = new Arti();
+    public static String data;
+    public static Arti arti = new Arti("Mercedes","classe A", "Essence","AA-455-ZE");
     AES_GCM_Init aes;
     Threads threads;
     ThreadsDecrypt threadsDecrypt;
@@ -131,29 +133,30 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("NewApi")
     private void apiCall() {
-       Payload payload  = new Payload("mBWGa9XY+l+tpD+jz53fHYFEZoqE8fLmM6r8idab7sJkA2Qr4Q8PD+HRyox3QQrE2pIC8pOfxJgOKUEA");
+       Payload payload  = new Payload("CNsgqakZPD+53F1gwh5agk7Yv97/95QcDH6wwkw3hADyZMgnC6iSGP89VR2rrPPmXqhpxgBVbWCJJ6XN4Fy90pEPAqYzE1kTy9M=");
         // gson = new GsonBuilder().setLenient().create();
         try {
-         /*   //chiffrement
-             threads.startThread(aes, carList);
-
-             //System.out.println(MainActivity.arti);
-           String testMess = Encrypt.encrypt("Bonjour tous le monde".getBytes(), aes.getKey(), aes.getIV());
+           //chiffrement
+             data = arti.concat();
+             threads.startThread(aes, data);
+           // System.out.println("je suis une donnée : "+data);
+           /*  //System.out.println(MainActivity.arti);
+           String testMess = Encrypt.encrypt(arti.concat().getBytes(), aes.getKey(), aes.getIV());
            //System.out.println("Bonjour tous le monde".getBytes().length);
             String testKey = Base64.getEncoder().encodeToString(aes.getKey());
             String testIV = Base64.getEncoder().encodeToString(aes.getIV());
-            System.out.println("cipher = "+testMess+" " +"key = "+testKey+" "+"Iv = "+ testIV);*/
+            System.out.println("cipher = "+testMess+" " +"key = "+testKey+" "+"Iv = "+ testIV);
 
           //  arti = new Arti(Base64.getEncoder().encodeToString(aes.getKey()) ,Base64.getEncoder().encodeToString(aes.getIV()) , Encrypt.encrypt("Bonjour tous le monde".getBytes(), aes.getKey(), aes.getIV()));
 
-
+            */
             //payload.setData(Encrypt.encrypt(payload.getData().getBytes(), aes.getKey(), aes.getIV()));
 
         } catch (Exception e) {
            System.out.println("je ne suis pas bon");
         }
-        //retrofit = new Retrofit.Builder().baseUrl(base_url).addConverterFactory(GsonConverterFactory.create(gson)).build();
-       // APIinterface apIinterface = retrofit.create(APIinterface.class);
+       // retrofit = new Retrofit.Builder().baseUrl(base_url).addConverterFactory(GsonConverterFactory.create(gson)).build();
+        //APIinterface apIinterface = retrofit.create(APIinterface.class);
 
         Call<Payload> call = apIinterface.sendData(payload);
         call.enqueue(new Callback<Payload>() {
@@ -161,11 +164,9 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Payload> call, Response<Payload> response) {
                 try {
                    // threadsDecrypt.startThread(aes,response);
-                    System.out.println(response.body().getData());
-                    System.out.println("je suis la response");
-                   // Function.splitme(Base64.getDecoder().decode(response.body().getData()))
-                    String resp = Decrypt.decrypt(response.body().getData());
-                    System.out.println("je suis la response : "+resp);
+
+                    threadsDecrypt.startThread(aes,response);
+
 
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
@@ -178,13 +179,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Payload> call, Throwable t) {
-
+                System.out.println(t.getMessage());
                 Toast.makeText(getApplicationContext(), "noooooooooooooooooooooo", Toast.LENGTH_LONG).show();
             }
         });
 
-           // threads.stopThread();
-            //threadsDecrypt.stopThread();
+            threads.stopThread();
+            threadsDecrypt.stopThread();
+
     }
 
 

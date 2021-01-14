@@ -16,11 +16,11 @@ public class MainViewModel extends ViewModel {
 
     public void init(){
 
-        immatText.setValue("immat: AA-455-ZE");
-        clientidText.setValue("Liste de voiture Pour id: 4");
-        marqueText.setValue("Marque: Mercedes");
-        modeleText.setValue("Modèle: classe A");
-        energieText.setValue("EnergieNGC: Essence");
+        immatText.setValue("0000");
+        clientidText.setValue("Liste de voiture Pour id: 1");
+        marqueText.setValue("twingo");
+        modeleText.setValue("pire");
+        energieText.setValue("pousière");
     }
 
 }
