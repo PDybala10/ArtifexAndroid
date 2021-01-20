@@ -9,6 +9,7 @@ import com.ndesigne.artifex2.model.AES.AES_GCM_Init;
 import com.ndesigne.artifex2.model.AES.Encrypt;
 import com.ndesigne.artifex2.model.entities.Arti;
 import com.ndesigne.artifex2.view.MainActivity;
+import com.ndesigne.artifex2.viewModel.MainViewModel;
 
 import java.util.ArrayList;
 import java.util.Base64;
@@ -32,6 +33,7 @@ public class Threads extends AppCompatActivity {
     class ExampleRunnable implements Runnable {
         String data;
         AES_GCM_Init aes;
+
         ExampleRunnable(String data, AES_GCM_Init aes) {
             this.data = data;
             this.aes = aes;
@@ -39,34 +41,35 @@ public class Threads extends AppCompatActivity {
         @Override
         public void run() {
             int i = 0;
-            //for (int i = 0; i < seconds; i++) {
-                if (stopThread)
-                    return;
 
-                    runOnUiThread(new Runnable() {
-                        @SuppressLint("NewApi")
-                        @Override
-                        public void run() {
-                            try {
+            if (stopThread)
+                return;
 
-                            MainActivity.data =  Encrypt.encrypt(data.getBytes(), aes.getKey(), aes.getIV());
+            runOnUiThread(new Runnable() {
+                @SuppressLint("NewApi")
+                @Override
+                public void run() {
+                    try {
 
-                            System.out.println("je suis une donnée : "+MainActivity.data);
-                             //  System.out.println(MainActivity.arti);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
 
-                System.out.println("\n\n\n\n\n\n\n startThread: " +i);
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                            MainViewModel.mutableLiveData.setValue(Encrypt.encrypt(data.getBytes(), aes.getKey(), aes.getIV()));
+                            System.out.println(MainViewModel.mutableLiveData.getValue());
+                            System.out.println(MainViewModel.mutableLiveData.getValue());
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-               // i++;
-           // }
+            });
+
+            System.out.println("\n\n\n\n\n\n\n startThread: " +i);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 

@@ -1,20 +1,24 @@
 package com.ndesigne.artifex2.model.entities;
 
-public class Arti {
+import android.graphics.Bitmap;
 
-    private String marque, modele, energieNGC, immat;
+public class Arti extends BasePayload{
 
-    public Arti( String marque, String modele, String energieNGC, String immat ) {
+    private String marque, modele, energieNGC, immat, owner;
+
+    public Arti( String marque, String modele, String energieNGC, String immat, String owner, String key ) {
+        super(key);
 
         this.marque = marque;
         this.modele = modele;
         this.energieNGC = energieNGC;
         this.immat = immat;
+        this.owner = owner;
 
     }
 
-    public Arti(){
-
+    public Arti(String key){
+        super(key);
     }
 
 
@@ -51,7 +55,13 @@ public class Arti {
         this.immat = immat;
     }
 
+    public String getOwner() {
+        return owner;
+    }
 
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
 
     public String concat(){
         return getMarque()+","+getModele()+","+getEnergieNGC()+","+getImmat();

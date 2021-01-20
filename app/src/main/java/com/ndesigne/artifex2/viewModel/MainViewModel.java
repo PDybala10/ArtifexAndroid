@@ -1,26 +1,26 @@
 package com.ndesigne.artifex2.viewModel;
 
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.ndesigne.artifex2.model.entities.Arti;
+import com.ndesigne.artifex2.model.entities.Image;
+
 public class MainViewModel extends ViewModel {
 
-    public static MutableLiveData<String> immatText = new MutableLiveData<>();
-    public static MutableLiveData<String> clientidText = new MutableLiveData<>();
-    public static MutableLiveData<String> marqueText = new MutableLiveData<>();
-    public static MutableLiveData<String> modeleText = new MutableLiveData<>();
-    public static MutableLiveData<String> energieText = new MutableLiveData<>();
+    public static MutableLiveData<Arti> mutableArti = new MutableLiveData<>();
+    public static MutableLiveData<String> mutableLiveData = new MutableLiveData<>();
+    public static MutableLiveData<String> mutableLiveDecrypt = new MutableLiveData<>();
+    public static MutableLiveData<Image> mutableLiveImage = new MutableLiveData<>();
+
 
     public void init(){
 
-        immatText.setValue("0000");
-        clientidText.setValue("Liste de voiture Pour id: 1");
-        marqueText.setValue("twingo");
-        modeleText.setValue("pire");
-        energieText.setValue("pousière");
+        mutableArti.setValue(new Arti("twingo","0000","pire","pousière","dreamTe","data"));
+
+        mutableLiveImage.setValue(new Image("dreamTe",null,"picture"));
+
     }
 
 }

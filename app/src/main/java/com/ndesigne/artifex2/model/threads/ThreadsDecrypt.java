@@ -13,7 +13,9 @@ import com.ndesigne.artifex2.model.AES.Encrypt;
 import com.ndesigne.artifex2.model.entities.Arti;
 import com.ndesigne.artifex2.model.entities.Payload;
 import com.ndesigne.artifex2.view.MainActivity;
+import com.ndesigne.artifex2.viewModel.MainViewModel;
 
+import java.lang.reflect.Type;
 import java.util.Base64;
 
 import javax.inject.Inject;
@@ -23,7 +25,7 @@ import retrofit2.Response;
 
 public class ThreadsDecrypt extends AppCompatActivity {
 
-   private  volatile boolean stopThread = false;
+    private  volatile boolean stopThread = false;
 
 
 
@@ -32,7 +34,7 @@ public class ThreadsDecrypt extends AppCompatActivity {
         ExampleRunnable runnable = new ExampleRunnable(response, aes);
         new Thread(runnable).start();
 
-       //return response.body().getData();
+        //return response.body().getData();
     }
     public  void stopThread() {
         stopThread = true;
@@ -41,56 +43,43 @@ public class ThreadsDecrypt extends AppCompatActivity {
     class ExampleRunnable implements Runnable {
         Response<Payload> response;
         AES_GCM_Init aes;
+        Type type;
         ExampleRunnable(Response<Payload> response, AES_GCM_Init aes) {
             this.response = response;
             this.aes = aes;
+
         }
         @Override
         public void run() {
             int i = 0;
             //for (int i = 0; i < seconds; i++) {
-                if (stopThread)
-                    return;
+            if (stopThread)
+                return;
 
-                    runOnUiThread(new Runnable() {
-                        @SuppressLint("NewApi")
-                        @Override
-                        public void run() {
-                            try {
-                               /* System.out.println("je suis ll'IV "+response.body().getIV());
-                                MainActivity.immatText.setText(Decrypt.decrypt(response.body().getImmat(),Base64.getDecoder().decode(response.body().getKey()),Base64.getDecoder().decode(response.body().getIV())));
-                                MainActivity.clientidText.setText("Liste de voiture Pour id: "+response.body().getClientid());
-                                MainActivity.marqueText.setText(Decrypt.decrypt(response.body().getMarque(),Base64.getDecoder().decode(response.body().getKey()),Base64.getDecoder().decode(response.body().getIV())));
-                                MainActivity.modeleText.setText(Decrypt.decrypt(response.body().getModele(),Base64.getDecoder().decode(response.body().getKey()),Base64.getDecoder().decode(response.body().getIV())));
-                                MainActivity.energieText.setText(Decrypt.decrypt(response.body().getEnergieNGC(),Base64.getDecoder().decode(response.body().getKey()),Base64.getDecoder().decode(response.body().getIV())));*/
+            runOnUiThread(new Runnable() {
+                @SuppressLint("NewApi")
+                @Override
+                public void run() {
+                    try {
 
-                                response.body().setData(Decrypt.decrypt(response.body().getData()));
-                                System.out.println("ppppppppppp : "+response.body().getData());
-                                Arti newArti = new Arti();
-                                Gson gson = new GsonBuilder().create();
-                                 newArti = gson.fromJson(response.body().getData(),Arti.class);
+                        response.body().setData(Decrypt.decrypt(response.body().getData()));
+                        MainViewModel.mutableLiveDecrypt.setValue(response.body().getData());
 
-                                MainActivity.immatText.setText(newArti.getImmat());
 
-                                MainActivity.marqueText.setText(newArti.getMarque());
-
-                                MainActivity.modeleText.setText(newArti.getModele());
-
-                                MainActivity.energieText.setText(newArti.getEnergieNGC());
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-
-                System.out.println("\n\n\n\n\n\n\n startThread: " +i);
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-               // i++;
-           // }
+            });
+
+            System.out.println("\n\n\n\n\n\n\n startThread: " +i);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            // i++;
+            // }
         }
     }
 
