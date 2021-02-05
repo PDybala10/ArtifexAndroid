@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
 
-    public static Arti arti = new Arti("Mercedes","classe A", "Essence","AA-455-ZE","dreamTe","data");
+    public static Arti arti = new Arti("Mercedes","classe A+", "Essence","AA-455-ZE","dreamTe","data");
     public  static Image image = new Image("dreamTe",null,"picture");
     AES_GCM_Init aes;
     Threads threads, threads1;
