@@ -4,17 +4,15 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.FileUtils;
-
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,14 +21,10 @@ import androidx.core.content.FileProvider;
 import androidx.lifecycle.Observer;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.ndesigne.artifex2.BuildConfig;
 import com.ndesigne.artifex2.R;
-import com.ndesigne.artifex2.function.Function;
 import com.ndesigne.artifex2.injection.ArtiApplication;
 import com.ndesigne.artifex2.model.AES.AES_GCM_Init;
-import com.ndesigne.artifex2.model.AES.Decrypt;
-import com.ndesigne.artifex2.model.AES.Encrypt;
 import com.ndesigne.artifex2.model.entities.Arti;
 import com.ndesigne.artifex2.model.entities.Image;
 import com.ndesigne.artifex2.model.entities.Payload;
@@ -41,14 +35,10 @@ import com.ndesigne.artifex2.viewModel.MainViewModel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import javax.inject.Inject;
 
@@ -56,93 +46,96 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Inject
-    Retrofit retrofit;
-
-    @Inject
-    Gson gson;
-
-    @Inject
-    APIinterface apIinterface;
-
-    @Inject
-    MainViewModel mainViewModel;
-
-    @Inject
-    String base_url;
-
-    public static TextView clientidText,marqueText,modeleText,energieText,immatText;
-    public static ImageView imageView;
-    private Button button;
-    public static String data;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
-
-    public static Arti arti = new Arti("Mercedes","classe A+", "Essence","AA-455-ZE","dreamTe","data");
-    public  static Image image = new Image("dreamTe",null,"picture");
+    public static TextView marqueText, modeleText, version_comText, energieText, transmissionText, categorieText, descriptionText, anneeText;
+    public static TextView an_mise_en_circulationText, kilometrageText, prixText, prem_mainText, voitureID, clientID;
+    public static ImageView imageView;
+    public static int clientIdGlobal = 0;
+    public static Image image = new Image(0, 0, "dreamTe", null, "picture");
+    @Inject
+    Retrofit retrofit;
+    @Inject
+    Gson gson;
+    @Inject
+    APIinterface apIinterface;
+    @Inject
+    MainViewModel mainViewModel;
+    @Inject
+    String base_url;
     AES_GCM_Init aes;
-    Threads threads, threads1;
+    Threads threads;
     ThreadsDecrypt threadsDecrypt;
-    ArrayList<String> carList;
-
+    private Button boutonPostText;
+    private Button boutonPostImage;
+    private LinearLayout visileBouton;
+    private LinearLayout affiche;
 
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        carList = new ArrayList<>();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        immatText = findViewById(R.id.immatText);
+
         marqueText = findViewById(R.id.marqueText);
+        voitureID = findViewById(R.id.voitureID);
+        clientID = findViewById(R.id.clientID);
         modeleText = findViewById(R.id.modeleText);
-        energieText = findViewById(R.id.energieText);
-        button = findViewById(R.id.buttonPost);
+        version_comText = findViewById(R.id.version);
+        energieText = findViewById(R.id.energie);
+        transmissionText = findViewById(R.id.transmission);
+        categorieText = findViewById(R.id.carosserie);
+        descriptionText = findViewById(R.id.description);
+        anneeText = findViewById(R.id.annee);
+        an_mise_en_circulationText = findViewById(R.id.anneMiseCircu);
+        kilometrageText = findViewById(R.id.kilometrage);
+        prixText = findViewById(R.id.prix);
+        prem_mainText = findViewById(R.id.premierMain);
+
+
+        boutonPostText = findViewById(R.id.post);
+        boutonPostImage = findViewById(R.id.postImage);
+        visileBouton = findViewById(R.id.visileBouton);
+        affiche = findViewById(R.id.affiche);
         imageView = findViewById(R.id.imageView);
         aes = AES_GCM_Init.getInstance();
         threads = new Threads();
         threadsDecrypt = new ThreadsDecrypt();
 
-        carList.add(marqueText.getText().toString());
-        carList.add(modeleText.getText().toString());
-        carList.add(energieText.getText().toString());
-        carList.add(immatText.getText().toString());
-
-        //ajouter image
-       /* ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        Bitmap icon = BitmapFactory.decodeResource(this.getResources(), R.drawable.image);
-        icon.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-        byte[] imageBytes = stream.toByteArray();
-        String image = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        arti.setImage(image);*/
         ((ArtiApplication) getApplication()).getNetworkComponent().inject(MainActivity.this);
 
-        mainViewModel.mutableArti.observe(this, new Observer<Arti>() {
+        MainViewModel.mutableArti.observe(this, new Observer<Arti>() {
             @Override
             public void onChanged(Arti arti) {
+                clientIdGlobal = arti.getClientId();
+                clientID.setText(String.valueOf(arti.getClientId()));
+                voitureID.setText(String.valueOf(arti.getVoitureId()));
                 modeleText.setText(arti.getModele());
-                energieText.setText(arti.getEnergieNGC());
-                immatText.setText(arti.getImmat());
                 marqueText.setText(arti.getMarque());
+                version_comText.setText(arti.getVersion_com());
+                energieText.setText(arti.getEnergie());
+                transmissionText.setText(arti.getTransmission());
+                categorieText.setText(arti.getCategorie());
+                descriptionText.setText(arti.getDescription());
+                anneeText.setText(String.valueOf(arti.getAnnee()));
+                an_mise_en_circulationText.setText(String.valueOf(arti.getAn_mise_en_circulation()));
+                kilometrageText.setText(String.valueOf(arti.getKilometrage()));
+                prixText.setText(String.valueOf(arti.getPrix()));
+                prem_mainText.setText(String.valueOf(arti.isPrem_main()));
 
-                //image
-                if(image.getImage() != null) {
-                    byte[] decodedString = Base64.decode(image.getImage(), Base64.DEFAULT);
-                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-
-                    imageView.setImageBitmap(decodedByte);
-                }
             }
         });
 
-        mainViewModel.mutableLiveImage.observe(this, new Observer<Image>() {
+
+        MainViewModel.mutableLiveImage.observe(this, new Observer<Image>() {
             @Override
             public void onChanged(Image s) {
-                if(image.getImage() != null) {
+                if (image.getImage() != null) {
                     byte[] decodedString = Base64.decode(image.getImage(), Base64.DEFAULT);
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
@@ -151,73 +144,88 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mainViewModel.mutableLiveData.observe(this, new Observer<String>() {
+        MainViewModel.mutableLiveData.observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 apiCallData();
             }
         });
 
-        mainViewModel.mutableLiveDecrypt.observe(this, new Observer<String>() {
+        MainViewModel.mutableLiveDecrypt.observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 int pos = s.indexOf("picture");
-                if(pos == -1){
-                   // Gson gson = new GsonBuilder().create();
-                    Arti arti = gson.fromJson(s,Arti.class);
+                if (pos == -1) {
+                    Arti arti = gson.fromJson(s, Arti.class);
+                    Toast.makeText(getApplicationContext(), "voiture " + arti.getVoitureId() + " du client " +
+                                    arti.getClientId() + " ajouter"
+                            , Toast.LENGTH_LONG).show();
                     MainViewModel.mutableArti.setValue(arti);
-                }
-                else {
-                    Image img = gson.fromJson(s,Image.class);
-                    //Gson gson = new GsonBuilder().create();
+
+                } else {
+                    Image img = gson.fromJson(s, Image.class);
                     MainViewModel.mutableLiveImage.setValue(img);
+
                 }
 
             }
         });
-
-        button.setOnClickListener(new View.OnClickListener() {
+        // send data
+        boutonPostText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String data = gson.toJson(arti);
-
+                String data = gson.toJson(MainViewModel.mutableArti.getValue());
                 threads.startThread(aes, data);
+                affiche.setVisibility(View.VISIBLE);
+                visileBouton.setVisibility(View.GONE);
+                boutonPostImage.setVisibility(View.VISIBLE);
 
-               /* System.out.println("toute la donnée: "+data);
-                System.out.println("toute la donnée: "+data);*/
+            }
+        });
+        // send picture
+        boutonPostImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 dispatchTakePictureIntent();
+                boutonPostImage.setVisibility(View.GONE);
             }
         });
 
+    }
 
+    @Override
+    public void onBackPressed() {
+        MainViewModel.init();
+        Intent intent = new Intent(getApplicationContext(), Form.class);
+        startActivity(intent);
+        this.finish();
     }
 
     @SuppressLint("NewApi")
     private void apiCallData() {
 
-        Payload payload  = new Payload(MainViewModel.mutableLiveData.getValue());
+        Payload payload = new Payload(MainViewModel.mutableLiveData.getValue());
         Call<Payload> call = apIinterface.sendData(payload);
+
         call.enqueue(new Callback<Payload>() {
             @Override
             public void onResponse(Call<Payload> call, Response<Payload> response) {
                 try {
-
-                    threadsDecrypt.startThread(aes,response);
+                    // call Decrypt Fonction
+                    threadsDecrypt.startThread(aes, response);
 
 
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
 
-                System.out.println("TEST OK");
-
-                Toast.makeText(getApplicationContext(), "API SUCCESSSSSSSSSSSSSSSSSSSS", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "API SUCCESS", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<Payload> call, Throwable t) {
-                System.out.println(t.getMessage());
-                Toast.makeText(getApplicationContext(), "noooooooooooooooooooooo", Toast.LENGTH_LONG).show();
+
+                Toast.makeText(getApplicationContext(), "API ERROR", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -265,6 +273,7 @@ public class MainActivity extends AppCompatActivity {
         if (delTestFile.exists()) delTestFile.delete();
         return new File(internalFileDir, "mytest.jpg");
     }
+
     File getPhotoFile(String fileName) {
         return new File(getFilesDir(), "images/toto/mytest.jpg");
     }
@@ -294,12 +303,9 @@ public class MainActivity extends AppCompatActivity {
             byte[] imageBytes = destOutStream.toByteArray();
             String imageStr = Base64.encodeToString(imageBytes, Base64.DEFAULT);
             image.setImage(imageStr);
-             String dataJ = gson.toJson(image);
+            String dataJ = gson.toJson(image);
 
-             threads.startThread(aes, dataJ);
-             System.out.println("toute la donnée: "+dataJ);
-             System.out.println("toute la donnée: "+dataJ);
-           // mImageView.setImageBitmap(destBitmap);
+            threads.startThread(aes, dataJ);
             File destFile = getScaledPhotoFile();
             try {
                 destFile.createNewFile();

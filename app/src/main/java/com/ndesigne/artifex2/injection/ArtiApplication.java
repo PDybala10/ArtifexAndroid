@@ -13,7 +13,8 @@ public class ArtiApplication extends Application {
                 .applicationModule(new ApplicationModule())
                 .build();
     }
-    public ApplicationComponent getNetworkComponent(){
+
+    public ApplicationComponent getNetworkComponent() {
         return applicationComponent;
     }
 }
