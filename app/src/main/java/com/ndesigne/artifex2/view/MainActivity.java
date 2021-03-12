@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
     public static TextView marqueText, modeleText, version_comText, energieText, transmissionText, categorieText, descriptionText, anneeText;
     public static TextView an_mise_en_circulationText, kilometrageText, prixText, prem_mainText, voitureID, clientID;
     public static ImageView imageView;
-    public static int clientIdGlobal = 0;
-    public static Image image = new Image(0, 0, "dreamTe", null, "picture");
+    public static int clientIdGlobal = 1;
+    public static Image image = new Image(1, 0, "dreamTe", null, "picture");
     @Inject
     Retrofit retrofit;
     @Inject
@@ -161,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
                                     arti.getClientId() + " ajouter"
                             , Toast.LENGTH_LONG).show();
                     MainViewModel.mutableArti.setValue(arti);
+                    image.setVoitureId(arti.getVoitureId());
 
                 } else {
                     Image img = gson.fromJson(s, Image.class);

@@ -32,6 +32,8 @@ public class MainViewModel extends ViewModel {
         mutableLiveData = new MutableLiveData<>();
         mutableLiveDecrypt = new MutableLiveData<>();
 
+
     }
+
 
 }
