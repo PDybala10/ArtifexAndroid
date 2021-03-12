@@ -190,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 dispatchTakePictureIntent();
                 boutonPostImage.setVisibility(View.GONE);
+                imageView.setVisibility(View.VISIBLE);
             }
         });
 
@@ -207,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
     private void apiCallData() {
 
         Payload payload = new Payload(MainViewModel.mutableLiveData.getValue());
+
         Call<Payload> call = apIinterface.sendData(payload);
 
         call.enqueue(new Callback<Payload>() {

@@ -59,7 +59,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="30dp"
                     android:textSize="14dp"
-                    android:text="mégane"
+                    android:text="megane"
                     android:hint="Modèle:"
                     android:layout_marginTop="80dp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -263,7 +263,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="30dp"
                     android:textSize="14dp"
-                    android:text="voiture pour des personnes responsable"
+                    android:text="voiture pour des personnes responsables"
                     android:hint="Description:"
                     android:layout_marginTop="80dp" />
             </com.google.android.material.textfield.TextInputLayout>
