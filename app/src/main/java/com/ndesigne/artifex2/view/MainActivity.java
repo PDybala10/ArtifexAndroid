@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
+
     public static TextView marqueText, modeleText, version_comText, energieText, transmissionText, categorieText, descriptionText, anneeText;
     public static TextView an_mise_en_circulationText, kilometrageText, prixText, prem_mainText, voitureID, clientID;
     public static ImageView imageView;

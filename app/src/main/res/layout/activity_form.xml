@@ -22,133 +22,260 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
                 android:gravity="center"
+                android:textColor="#662BCD"
                 android:text="ArtiFex Park"
-                android:textSize="30dp" />
+                android:textSize="25dp" />
 
-            <EditText
-                android:id="@+id/setMarqueText"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:text="renault"
-                android:textSize="18dp" />
+                app:endIconMode="clear_text"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/setMarqueText"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:textSize="14dp"
+                    android:text="renault"
+                    android:hint="Marque:"
+                    android:layout_marginTop="80dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-            <EditText
-                android:id="@+id/setModeleText"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:text="mégane"
-                android:textSize="18dp" />
+                app:endIconMode="clear_text"
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/setVersion"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:text="V0 JIS 7899 265"
-                android:textSize="18dp" />
+                <EditText
+                    android:id="@+id/setModeleText"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:textSize="14dp"
+                    android:text="mégane"
+                    android:hint="Modèle:"
+                    android:layout_marginTop="80dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/setAnnee"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:text="2022"
-                android:textSize="18dp" />
+                app:endIconMode="clear_text"
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/setEnergie"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:text="essence"
-                android:textSize="18dp" />
+                <EditText
+                    android:id="@+id/setVersion"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:textSize="14dp"
+                    android:text="V0 JIS 7899 265"
+                    android:hint="Version:"
+                    android:layout_marginTop="80dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/setKilometrage"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:text="298"
-                android:textSize="18dp" />
 
-            <EditText
-                android:id="@+id/setPrix"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:text="3600.99"
-                android:textSize="18dp" />
+                app:endIconMode="clear_text"
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/setAnneMiseCircu"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:text="2020"
-                android:textSize="18dp" />
+                <EditText
+                    android:id="@+id/setAnnee"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:textSize="14dp"
+                    android:text="2022"
+                    android:hint="Année:"
+                    android:layout_marginTop="80dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/setTransmission"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:text="trans1-essence"
-                android:textSize="18dp" />
 
-            <EditText
-                android:id="@+id/setPremierMain"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:text="true"
-                android:textSize="18dp" />
+                app:endIconMode="clear_text"
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/setCategorie"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:text="berline"
-                android:textSize="18dp" />
+                <EditText
+                    android:id="@+id/setEnergie"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:textSize="14dp"
+                    android:text="essence"
+                    android:hint="Energie:"
+                    android:layout_marginTop="80dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/setCarosserie"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:text="blanche-cool"
-                android:textSize="18dp" />
+                app:endIconMode="clear_text"
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/setDescription"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                <EditText
+                    android:id="@+id/setKilometrage"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:textSize="14dp"
+                    android:text="298"
+                    android:hint="Kilométrage:"
+                    android:layout_marginTop="80dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:text="voiture pour des personnes responsable"
-                android:textSize="18dp" />
+                app:endIconMode="clear_text"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/setPrix"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:textSize="14dp"
+                    android:text="3600.99"
+                    android:hint="Prix:"
+                    android:layout_marginTop="80dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                app:endIconMode="clear_text"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/setAnneMiseCircu"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:textSize="14dp"
+                    android:text="2020"
+                    android:hint="Année Mise En circulation:"
+                    android:layout_marginTop="80dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                app:endIconMode="clear_text"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/setTransmission"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:textSize="14dp"
+                    android:text="trans1-essence"
+                    android:hint="Transmission:"
+                    android:layout_marginTop="80dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                app:endIconMode="clear_text"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/setPremierMain"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:textSize="14dp"
+                    android:text="true"
+                    android:hint="Première main:"
+                    android:layout_marginTop="80dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                app:endIconMode="clear_text"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/setCategorie"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:textSize="14dp"
+                    android:text="berline"
+                    android:hint="Catégorie:"
+                    android:layout_marginTop="80dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                app:endIconMode="clear_text"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/setCarosserie"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:textSize="14dp"
+                    android:text="blanche-cool"
+                    android:hint="Carosserie:"
+                    android:layout_marginTop="80dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                app:endIconMode="clear_text"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/setDescription"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:textSize="14dp"
+                    android:text="voiture pour des personnes responsable"
+                    android:hint="Description:"
+                    android:layout_marginTop="80dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/buttonPost"
-                android:layout_width="wrap_content"
+                android:layout_width="256dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="post" />
+                android:background="#662BCD"
+                android:layout_marginBottom="25dp"
+                android:text="Save" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

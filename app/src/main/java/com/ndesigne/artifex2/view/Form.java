@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.ndesigne.artifex2.R;
 import com.ndesigne.artifex2.model.entities.Arti;
 import com.ndesigne.artifex2.viewModel.FormViewModel;
@@ -18,9 +20,10 @@ import javax.inject.Inject;
 
 public class Form extends AppCompatActivity {
 
-    public static TextView setMarqueText, setModeleText, setVersion_com, setEnergie, setTransmission, setCategorie, setDescription, setAnnee, setCarroserie;
+    public static EditText  setModeleText, setVersion_com, setEnergie, setTransmission, setCategorie, setDescription, setAnnee, setCarroserie;
     public static TextView setAn_mise_en_circulation, setKilometrage, setPrix, setPrem_main;
     public static Button button;
+    public static EditText setMarqueText;
     @Inject
     FormViewModel formViewModel;
 
