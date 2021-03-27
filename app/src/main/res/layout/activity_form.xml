@@ -23,7 +23,7 @@
                 android:layout_marginBottom="30dp"
                 android:gravity="center"
                 android:textColor="#662BCD"
-                android:text="ArtiFex Park"
+                android:text="Artifex Park"
                 android:textSize="25dp" />
 
 
